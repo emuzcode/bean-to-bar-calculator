@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect, useRef } from "react"
 import type { CacaoInputs } from "@/lib/cacao-calculator"
 import type { Locale } from "@/lib/i18n"
 import { t } from "@/lib/i18n"
@@ -33,6 +33,17 @@ function InputRow({
   unit?: string
   sliderStep?: number
 }) {
+  const [localValue, setLocalValue] = useState(String(value))
+  const isFocused = useRef(false)
+
+  // Sync local value when parent value changes (e.g. from slider),
+  // but only when the input is not focused
+  useEffect(() => {
+    if (!isFocused.current) {
+      setLocalValue(String(value))
+    }
+  }, [value])
+
   return (
     <div className="space-y-2.5 px-4 py-3.5">
       <div className="flex items-center justify-between">
@@ -40,10 +51,29 @@ function InputRow({
         <div className="flex items-center gap-1.5">
           <input
             type="number"
-            value={value}
+            value={localValue}
             onChange={(e) => {
-              const v = Number.parseFloat(e.target.value)
+              const raw = e.target.value
+              setLocalValue(raw)
+              const v = Number.parseFloat(raw)
               if (!Number.isNaN(v)) onChange(v)
+            }}
+            onFocus={() => {
+              isFocused.current = true
+            }}
+            onBlur={() => {
+              isFocused.current = false
+              const v = Number.parseFloat(localValue)
+              if (Number.isNaN(v) || localValue.trim() === "") {
+                // Reset to min if empty or invalid on blur
+                setLocalValue(String(min))
+                onChange(min)
+              } else {
+                // Clamp to valid range
+                const clamped = Math.min(Math.max(v, min), max)
+                setLocalValue(String(clamped))
+                onChange(clamped)
+              }
             }}
             min={min}
             max={max}
