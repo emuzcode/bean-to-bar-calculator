@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="102" fill="#08090e"/>
+  <text x="50%" y="45%" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui, sans-serif" font-size="179" font-weight="700" fill="#10e6a0">C</text>
+  <text x="50%" y="72%" text-anchor="middle" dominant-baseline="central"
+        font-family="system-ui, sans-serif" font-size="41" font-weight="500"
+        fill="#d0d5dd" letter-spacing="0.15em">CACAO</text>
+</svg>

@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    /* Almost-black base */
+    --background: 230 18% 3%;
+    --foreground: 210 10% 82%;
+    /* Cards: flat dark grey, subtle glass feel achieved via component classes */
+    --card: 230 14% 7%;
+    --card-foreground: 210 10% 82%;
+    --popover: 230 14% 7%;
+    --popover-foreground: 210 10% 82%;
+    /* Single accent: neon mint-cyan */
+    --primary: 164 95% 50%;
+    --primary-foreground: 230 18% 3%;
+    /* Neutral secondary */
+    --secondary: 230 12% 11%;
+    --secondary-foreground: 210 10% 70%;
+    --muted: 230 10% 14%;
+    --muted-foreground: 220 8% 42%;
+    /* Accent reused as primary - single color system */
+    --accent: 164 95% 50%;
+    --accent-foreground: 230 18% 3%;
+    --destructive: 0 65% 52%;
+    --destructive-foreground: 0 0% 98%;
+    --warning: 42 90% 55%;
+    --warning-foreground: 230 18% 3%;
+    --border: 230 10% 12%;
+    --input: 230 10% 12%;
+    --ring: 164 95% 50%;
+    --chart-1: 164 95% 50%;
+    --chart-2: 210 10% 40%;
+    --chart-3: 42 90% 55%;
+    --chart-4: 230 10% 22%;
+    --chart-5: 0 65% 52%;
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Safe area for iOS */
+@supports (padding: env(safe-area-inset-top)) {
+  .safe-top {
+    padding-top: env(safe-area-inset-top);
+  }
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+}
+
+/* Glass card utility - very subtle frosted glass */
+.glass-card {
+  background: hsl(230 14% 7% / 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid hsl(230 10% 14%);
+}
+
+/* Scrollbar minimal */
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(230 10% 18%);
+  border-radius: 2px;
+}
